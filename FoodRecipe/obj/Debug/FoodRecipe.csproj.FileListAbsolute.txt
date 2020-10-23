@@ -13,3 +13,13 @@ D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\FoodRecipe.cs
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\FoodRecipe.csproj.CoreCompileInputs.cache
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\FoodRecipe.exe
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\FoodRecipe.pdb
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\SplashScreen.g.cs
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\SplashScreen.baml
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\cancel.png
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\hotpot.jpg
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\caloc.jpg
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\canhbido.jpg
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chetroinuoc.jpg
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chexoai.jpg
+D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chuoichien.jpg

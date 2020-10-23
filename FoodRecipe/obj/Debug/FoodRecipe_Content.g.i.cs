@@ -8,6 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/bandicam%202020-10-03%2023-46-01-884.mp4")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/caloc.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/canhbido.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chetroinuoc.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chexoai.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chuoichien.jpg")]
 
 
