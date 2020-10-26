@@ -9,7 +9,7 @@ namespace FoodRecipe.DTO
 {
     class Food
     {
-        public string FoodID { get; set; }
+        public int FoodID { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public string Area { get; set; }
@@ -19,7 +19,7 @@ namespace FoodRecipe.DTO
         public Recipe Recipe { get; set; }
         public List<Ingredient> Ingredients { get; set; }
 
-        public Food(string foodID, string name, string type, string area, DateTime createDate, bool isFavor, int ration, Recipe recipe, List<Ingredient> ingredients)
+        public Food(int foodID, string name, string type, string area, DateTime createDate, bool isFavor, int ration, Recipe recipe, List<Ingredient> ingredients)
         {
             FoodID = foodID;
             Name = name;
@@ -34,7 +34,7 @@ namespace FoodRecipe.DTO
 
         public Food(DataRow row, Recipe recipe = null, List<Ingredient> ingredients = null)
         {
-            FoodID = (string)row["FoodID"];
+            FoodID = (int)row["FoodID"];
             Name = (string)row["FoodName"];
             Type = (string)row["Type"];
             Area = (string)row["Area"];

@@ -26,7 +26,7 @@ namespace FoodRecipe.DAO
 
         private FoodImageDAO() { }
 
-        public List<FoodImage> GetAllAtStep(string foodID, int step)
+        public List<FoodImage> GetAllAtStep(int foodID, int step)
         {
             List<FoodImage> foodImageList = new List<FoodImage>();
 

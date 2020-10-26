@@ -26,7 +26,7 @@ namespace FoodRecipe.DAO
 
         private StepDAO() { }
 
-        public List<Step> GetAllAtRecipe(string foodID)
+        public List<Step> GetAllAtRecipe(int foodID)
         {
             List<Step> stepList = new List<Step>();
 
