@@ -26,7 +26,7 @@ namespace FoodRecipe.DAO
 
         private RecipeDAO() { }
 
-        public Recipe GetRecipe(string foodID)
+        public Recipe GetRecipe(int foodID)
         {
             Recipe recipe;
 

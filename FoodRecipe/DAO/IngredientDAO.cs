@@ -26,7 +26,7 @@ namespace FoodRecipe.DAO
 
         private IngredientDAO() { }
 
-        public List<Ingredient> GetAll(string foodID)
+        public List<Ingredient> GetAll(int foodID)
         {
             List<Ingredient> ingredientList = new List<Ingredient>();
 

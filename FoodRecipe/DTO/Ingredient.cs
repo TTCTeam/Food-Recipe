@@ -10,20 +10,20 @@ namespace FoodRecipe.DTO
     class Ingredient
     {
         public string Name { get; set; }
-        public float Amount { get; set; }
+        public decimal Amount { get; set; }
         public string Unit { get; set; }
 
-        public Ingredient(string name, float amount, string unit)
+        public Ingredient(string name, decimal amount, string unit)
         {
             Name = name;
             Amount = amount;
             Unit = unit;
         }
 
-        public Ingredient(DataRow row) // row = IngredientName | Amount | Unit
+        public Ingredient(DataRow row) // row = FoodID | IngredientName | Amount | Unit
         {
             Name = (string)row["IngredientName"];
-            Amount = (float)row["Amount"];
+            Amount = (decimal)row["Amount"];
             Unit = (string)row["Unit"];
         }
 

@@ -30,9 +30,10 @@ namespace FoodRecipe
 
         public void LoadAllFood()
         {
-            List<Food> foodList = FoodDAO.Instance.GetListFoodWithoutDetail();
+            //List<Food> foodList = FoodDAO.Instance.GetAllWithoutDetail();
+            Recipe l = RecipeDAO.Instance.GetRecipe(1);
 
-            dataGrid.ItemsSource = foodList;
+            //dataGrid.ItemsSource = l;
 
         }
           

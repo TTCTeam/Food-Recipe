@@ -30,14 +30,14 @@ namespace FoodRecipe.DAO
         {
             List<Food> foodList = new List<Food>();
 
-            string query = "SELECT * FROM Food";
+            string query = "select * from FOOD";
 
             try
             {
                 DataTable data = DataProvider.Instance.ExcuteQuery(query);
                 foreach (DataRow row in data.Rows)
                 {
-                    string foodID = (string)row["FoodID"];
+                    int foodID = (int)row["FoodID"];
 
                     Recipe recipe = RecipeDAO.Instance.GetRecipe(foodID);
 
@@ -55,11 +55,11 @@ namespace FoodRecipe.DAO
             return foodList;
         }
 
-        public List<Food> GetListFoodWithoutDetail()
+        public List<Food> GetAllWithoutDetail()
         {
             List<Food> foodList = new List<Food>();
 
-            string query = "SELECT * FROM Food";
+            string query = "select * from FOOD";
 
             try
             {
@@ -72,23 +72,33 @@ namespace FoodRecipe.DAO
             }
             catch (Exception e)
             {
-                throw new Exception("Excute GetListFoodWithoutDetail failed", e);
+                throw new Exception("Excute GetAllWithoutDetail failed", e);
             }
 
             return foodList;
         }
 
-        public void GetDetail(ref Food food)
+        public Food GetByID(int foodID)
         {
-            if (food.FoodID!=null)
+            Food result;
+            try
             {
-                Recipe recipe = RecipeDAO.Instance.GetRecipe(food.FoodID);
+                Recipe recipe = RecipeDAO.Instance.GetRecipe(foodID);
 
-                List<Ingredient> ingredients = IngredientDAO.Instance.GetAll(food.FoodID);
+                List<Ingredient> ingredients = IngredientDAO.Instance.GetAll(foodID);
 
-                food.Recipe = recipe;
-                food.Ingredients = ingredients;
+                string query = "select * from FOOD where FoodID = @FoodID";
+
+                DataTable data = DataProvider.Instance.ExcuteQuery(query, new object[] { foodID });
+
+                result = new Food(data.Rows[0], recipe, ingredients);
             }
+            catch (Exception e)
+            {
+                throw new Exception("Excute GetByID failed", e);
+            }
+
+            return result;
         }
     }
 }
