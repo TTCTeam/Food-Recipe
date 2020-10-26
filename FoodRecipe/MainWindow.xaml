@@ -5,9 +5,724 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FoodRecipe"
         mc:Ignorable="d"
-        Title="MainWindow" Height="675" Width="1000"       
+        Title="MainWindow"  Height="675" Width="1000"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Topmost="True"
+   
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Resources>
+
+        <!--Image backgroung toggle button when mouse_over-->
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="Images/MainScreen/menu_mouseover.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <!--Image backgroung close button when mouse_over-->
+        <ImageBrush x:Key="CloseBtn_MouseOver" 
+                    ImageSource="Images/MainScreen/close_mouseover.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+
+        <Style x:Key="Btn_ListView" TargetType="{x:Type Button}">
+            
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"
+                                />
+                    </ControlTemplate>
+                    
+                </Setter.Value>
+                
+            </Setter>
+           
+                
+            
+        </Style>
         
+        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"/>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource CloseBtn_MouseOver}"/>
+
+                            </Trigger>
+                            
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                    
+                </Setter.Value>
+                
+            </Setter>
+            
+        </Style>
+        
+        <!--text font style-->
+        <Style x:Key="font_style" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+
+
+        <Style TargetType="ToolTip" x:Key="tt_style">
+
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#f7b733"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+        </Style>
+
+        <Style TargetType="ToolTip"  x:Key="tt_add_style" BasedOn="{StaticResource tt_style}">
+
+           
+            <Setter Property="Placement" Value="Left"/>
+            <Setter Property="Width" Value="130"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="PlacementRectangle" Value="0,0,60,0"/>
+            <Setter Property="HorizontalOffset" Value="-20"/>
+            <Setter Property="VerticalOffset" Value="5"/>
+
+        </Style>
+
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}" >
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+
+                        <Border x:Name="border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True"
+                                />
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True" >
+
+                                <Setter Property="Background" 
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="True">
+
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0"
+              Background="#f7b733"
+              >
+            <StackPanel Orientation="Horizontal"
+                        >
+                <Image Source="Images/MainScreen/icon.png" Stretch="Fill"
+                       Height="35"
+                      
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       HorizontalAlignment="Left"
+                       Margin="5,2,0,2"/>
+                <TextBlock Text="Food Recipe" Style="{StaticResource font_style}"
+                           Margin="10,0,0,0"/>
+            </StackPanel>
+            <Button HorizontalAlignment="Right"
+                    Margin="7,5"
+                    Width="40"
+                    BorderThickness="0"
+                    Name="Close_Btn"
+                    Click="Close_Btn_Click"
+                    Style="{StaticResource Close_btn}"
+                    >
+                <Button.Background>
+                    <ImageBrush ImageSource="Images/MainScreen/close.png" 
+                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Button.Background>
+            </Button>
+
+        </Grid>
+
+
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              Name="Backgroung"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+            <!--Background Image-->
+            <Grid x:Name="About" Margin="65,50,0,50">
+
+                <Grid.Background>
+
+                    <ImageBrush ImageSource="Images/MainScreen/background.png" 
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                x:Name="img_bg"
+                                Stretch="Uniform"
+                          />
+                </Grid.Background>
+
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="1" Grid.RowSpan="3">
+            <!--Background Image-->
+            <!--<Grid x:Name="About" Margin="65,50,0,50">
+
+                <Grid.Background>
+
+                    <ImageBrush ImageSource="Images/MainScreen/background.png" Stretch="Uniform"
+                          />
+                </Grid.Background>
+
+            </Grid>-->
+
+            <!--//Navigation Panel//-->
+            <Grid x:Name="nav_pnl"
+              HorizontalAlignment="Left"
+              Width="65"
+              Background="#f7b733">
+                
+                <StackPanel x:Name="st_pnl">
+
+                    <Grid Height="90">
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="12*"/>
+                            <ColumnDefinition Width="53*"/>
+                        </Grid.ColumnDefinitions>-->
+
+                        <TextBlock
+                               Grid.Column="1"
+                               Margin="73,0,0,0"                              
+                               Text="M E N U"
+                               FontSize="22"
+                               Background="Transparent"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource font_style}">
+                            <TextBlock.Effect>
+
+                                <DropShadowEffect BlurRadius="10"
+                                              ShadowDepth="1"
+                                              Direction="-90"
+                                              Color="Gray"/>
+
+                            </TextBlock.Effect>
+                        </TextBlock>
+
+                        <!--Tongle Button - Click to show all the navagation-->
+                        <ToggleButton
+                        x:Name="Tg_Btn"
+                        Grid.Column="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left"
+                        Margin="15,0,0,0"
+                        Height="35"
+                        Width="35"
+                        BorderThickness="0"
+                        Unchecked="Tg_Btn_Unchecked"
+                        Checked="Tg_Btn_Checked"
+                        Style="{DynamicResource tb_style}"
+                        >
+                            <ToggleButton.Background>
+
+                                <ImageBrush ImageSource="Images/MainScreen/menu.png" Stretch="Fill"/>
+
+                            </ToggleButton.Background>
+
+                            <ToggleButton.Triggers>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="HideNavigation">
+
+                                            <DoubleAnimation Storyboard.TargetName="nav_pnl"
+                                                         Storyboard.TargetProperty="Width"
+                                                         BeginTime="0:0:0"
+                                                         From="230" To="65"
+                                                         Duration="0:0:0.2"/>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+
+                                    <BeginStoryboard>
+
+                                        <Storyboard x:Name="ShowNavigation">
+
+                                            <DoubleAnimation
+                                            
+                                            Storyboard.TargetName="nav_pnl"
+                                            Storyboard.TargetProperty="Width"
+                                            From="65" To="230"
+                                            Duration="0:0:0.3"
+                                            BeginTime="0:0:0"/>
+
+                                        </Storyboard>
+
+                                    </BeginStoryboard>
+
+                                </EventTrigger>
+
+                            </ToggleButton.Triggers>
+
+                        </ToggleButton>
+
+                    </Grid>
+
+                    <ListView x:Name="listView"
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+                        <!--Home-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="Home_Btn"
+                                        BorderThickness="0"
+                                        Click="Home_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/home.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+
+
+                                </Button>
+
+                                <TextBlock Text="Home"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_Home"
+                                     Content="Home"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--Favourite-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="Favorite_Btn"
+                                        BorderThickness="0"
+                                        Click="Favorite_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/favorite.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+
+
+                                </Button>
+
+                                <TextBlock Text="Favourite"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_Favorite"
+                                     Content="Favourite"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--Contact-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="Contact_Btn"
+                                        BorderThickness="0"
+                                       Click="Contact_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/contact.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+
+
+                                </Button>
+
+                                <TextBlock Text="Contact"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_Contact"
+                                     Content="Contact"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--Location-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="Location_Btn"
+                                        BorderThickness="0"
+                                        Click="Location_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/location.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+
+
+                                </Button>
+
+                                <TextBlock Text="Location"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_Location"
+                                     Content="Location"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--Setting-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="Setting_Btn"
+                                        BorderThickness="0"
+                                        Click="Setting_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/setting.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+
+
+                                </Button>
+                                <TextBlock Text="Setting"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_Setting"
+                                     Content="Setting"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <!--About-->
+
+                        <ListViewItem HorizontalAlignment="Left"
+                                  >
+
+                            <StackPanel Orientation="Horizontal"
+                                    Width="230"
+                                    VerticalAlignment="Center">
+                                <Button
+                                        Height="35"
+                                        Width="35"
+                                        Margin="7,0,0,0"    
+                                        Name="About_Btn"
+                                        BorderThickness="0"
+                                        Click="About_Btn_Click"
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="Images/MainScreen/about.png" 
+                                   Stretch="Fill" />
+
+                                    </Button.Background>
+                                    
+
+                                </Button>
+                                
+                                <TextBlock Text="About"
+                                       Margin="25,0,0,0"
+                                       Style="{StaticResource font_style}"/>
+
+                            </StackPanel>
+
+                            <!--Tooltip for Home will appear when hover-->
+
+                            <ListViewItem.ToolTip>
+
+                                <ToolTip x:Name="tt_About"
+                                     Content="About us"
+                                     Style="{StaticResource tt_style}"
+                                    />
+
+                            </ListViewItem.ToolTip>
+
+                        </ListViewItem>
+
+                        <ListView.ItemContainerStyle>
+
+                            <Style TargetType="ListViewItem">
+
+                                <Setter Property="Template">
+
+                                    <Setter.Value>
+
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                            <Border x:Name="Bd"
+                                                Height="60"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}"
+                                                SnapsToDevicePixels="True">
+
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                            </Border>
+
+                                            <ControlTemplate.Triggers>
+
+                                                <MultiTrigger>
+
+                                                    <MultiTrigger.Conditions>
+
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+
+                                                    </MultiTrigger.Conditions>
+
+                                                    <Setter Property="Background"
+                                                        Value="#ffca1a"
+                                                        TargetName="Bd"/>
+
+                                                    <Setter Property="BorderBrush" 
+                                                       TargetName="Bd"
+                                                       Value="#ffca1a"/>
+
+                                                </MultiTrigger>
+
+                                            </ControlTemplate.Triggers>
+
+                                        </ControlTemplate>
+
+                                    </Setter.Value>
+
+                                </Setter>
+
+                            </Style>
+
+                        </ListView.ItemContainerStyle>
+
+                    </ListView>
+
+                </StackPanel>
+
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+
+            <StackPanel Orientation="Horizontal"
+                                    
+                                  HorizontalAlignment="Right">
+                <Button
+                                        Height="50"
+                                        Width="50"
+                                        Margin="7,0,30,0"                                          
+                                        BorderThickness="0"                                      
+                                        HorizontalAlignment="Center"
+                                        Style="{DynamicResource Btn_ListView}"
+                                        >
+                    <Button.Background>
+                        <ImageBrush ImageSource="Images/MainScreen/add.png" 
+                                   Stretch="Fill" />
+
+                    </Button.Background>
+
+                    <Button.ToolTip>
+
+                        <ToolTip
+                           
+                            x:Name="btn_AddRecipe"
+                                     Content="Add Your Recipe"
+                                     Style="{StaticResource tt_add_style}"
+                                    />
+
+                    </Button.ToolTip>
+
+                </Button>
+            </StackPanel>
+
+        </Grid>
     </Grid>
+    
+
 </Window>

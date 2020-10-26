@@ -56,8 +56,8 @@ namespace FoodRecipe
 
                     string[] tokens = line.Split(new string[] { Slash }, StringSplitOptions.RemoveEmptyEntries);
 
-                    splscreen.Image = $"Images/{tokens[0]}";
-                    splscreen.CloseIcon = $"Images/{tokens[1]}";
+                    splscreen.Image = $"Images/SplashScreen/{tokens[0]}";
+                    splscreen.CloseIcon = $"Images/SplashScreen/{tokens[1]}";
                     splscreen.Title = tokens[2];
                     splscreen.Overview = tokens[3];
                 }
@@ -132,6 +132,13 @@ namespace FoodRecipe
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = SplashScreenDAO.getAll();
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Hide();
         }
     }
 }
