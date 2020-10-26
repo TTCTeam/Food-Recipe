@@ -55,9 +55,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DAO\FoodDAO.cs" />
+    <Compile Include="DAO\FoodImageDAO.cs" />
+    <Compile Include="DAO\IngredientDAO.cs" />
+    <Compile Include="DAO\RecipeDAO.cs" />
+    <Compile Include="DAO\StepDAO.cs" />
+    <Compile Include="DTO\Food.cs" />
+    <Compile Include="DTO\FoodImage.cs" />
+    <Compile Include="DTO\Ingredient.cs" />
+    <Compile Include="DTO\Recipe.cs" />
+    <Compile Include="DTO\Step.cs" />
     <Compile Include="MyRandom.cs" />
     <Compile Include="SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestDAO.xaml.cs">
+      <DependentUpon>TestDAO.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -73,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestDAO.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

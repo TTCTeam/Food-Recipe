@@ -23,3 +23,30 @@ D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\canhbi
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chetroinuoc.jpg
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chexoai.jpg
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\chuoichien.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csprojAssemblyReference.cache
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\MainWindow.g.cs
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\SplashScreen.g.cs
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\TestDAO.g.cs
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\App.g.cs
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe_MarkupCompile.cache
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe_MarkupCompile.lref
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.exe
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.pdb
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\cancel.png
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\hotpot.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\caloc.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\canhbido.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\chetroinuoc.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\chexoai.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\chuoichien.jpg
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.exe.config
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.exe
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.pdb
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\MainWindow.baml
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\SplashScreen.baml
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\TestDAO.baml
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.g.resources
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.Properties.Resources.resources
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csproj.GenerateResource.cache
+C:\Users\Minh Tan\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csproj.CoreCompileInputs.cache
