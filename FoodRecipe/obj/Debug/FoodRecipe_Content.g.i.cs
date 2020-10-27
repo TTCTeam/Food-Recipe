@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/mainscreen/add.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/like.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/notlike.png")]
 
 
