@@ -23,3 +23,28 @@ D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\Splash
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\SplashScreen\chetroinuoc.jpg
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\SplashScreen\chexoai.jpg
 D:\[20-21] HK1\Lập trình Window\FoodRecipe\FoodRecipe\bin\Debug\Images\SplashScreen\chuoichien.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\cancel.png
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\hotpot.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\caloc.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\canhbido.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\chetroinuoc.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\chexoai.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\Images\SplashScreen\chuoichien.jpg
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.exe.config
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.exe
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\bin\Debug\FoodRecipe.pdb
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csprojAssemblyReference.cache
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\MainWindow.g.cs
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\SplashScreen.g.cs
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\App.g.cs
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe_MarkupCompile.cache
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe_MarkupCompile.lref
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\MainWindow.baml
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\SplashScreen.baml
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.g.resources
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.Properties.Resources.resources
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csproj.GenerateResource.cache
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.csproj.CoreCompileInputs.cache
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.exe
+C:\Users\HA MINH CUONG\Documents\GitHub\Food-Recipe\FoodRecipe\obj\Debug\FoodRecipe.pdb
