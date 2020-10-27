@@ -13,16 +13,18 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
+        <local:AbsoluteConverter x:Key="converter"/>
+
         <!--Image backgroung toggle button when mouse_over-->
         <ImageBrush x:Key="tb_mouse_over"
-                    ImageSource="Images/MainScreen/menu_mouseover.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    ImageSource="{Binding Menu_MouseOver, Converter={StaticResource converter}}" RenderOptions.BitmapScalingMode="HighQuality"/>
 
         <!--Image backgroung close button when mouse_over-->
         <ImageBrush x:Key="CloseBtn_MouseOver" 
-                    ImageSource="Images/MainScreen/close_mouseover.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    ImageSource="{Binding Close_MouseOver, Converter={StaticResource converter}}" RenderOptions.BitmapScalingMode="HighQuality"/>
 
         <Style x:Key="Btn_ListView" TargetType="{x:Type Button}">
-            
+
             <Setter Property="Template">
 
                 <Setter.Value>
@@ -35,15 +37,15 @@
                                 SnapsToDevicePixels="True"
                                 />
                     </ControlTemplate>
-                    
+
                 </Setter.Value>
-                
+
             </Setter>
-           
-                
-            
+
+
+
         </Style>
-        
+
         <Style x:Key="Close_btn" TargetType="{x:Type Button}">
 
             <Setter Property="Template">
@@ -66,17 +68,17 @@
                                         Value="{StaticResource CloseBtn_MouseOver}"/>
 
                             </Trigger>
-                            
+
                         </ControlTemplate.Triggers>
 
                     </ControlTemplate>
-                    
+
                 </Setter.Value>
-                
+
             </Setter>
-            
+
         </Style>
-        
+
         <!--text font style-->
         <Style x:Key="font_style" TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -98,20 +100,21 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
 
             <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
-            <Setter Property="HorizontalOffset" Value="115"/>
-            <Setter Property="VerticalOffset" Value="12"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
             <Setter Property="HasDropShadow" Value="True"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
 
         </Style>
 
         <Style TargetType="ToolTip"  x:Key="tt_add_style" BasedOn="{StaticResource tt_style}">
-         
+
+
             <Setter Property="Placement" Value="Left"/>
             <Setter Property="Width" Value="130"/>
-            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
             <Setter Property="PlacementRectangle" Value="0,0,60,0"/>
-            <Setter Property="HorizontalOffset" Value="-200"/>
+            <Setter Property="HorizontalOffset" Value="-20"/>
             <Setter Property="VerticalOffset" Value="5"/>
 
         </Style>
@@ -185,7 +188,7 @@
               >
             <StackPanel Orientation="Horizontal"
                         >
-                <Image Source="Images/MainScreen/icon.png" Stretch="Fill"
+                <Image Source="{Binding Icon, Converter={StaticResource converter}}" Stretch="Fill"
                        Height="35"
                       
                        RenderOptions.BitmapScalingMode="HighQuality"
@@ -203,7 +206,7 @@
                     Style="{StaticResource Close_btn}"
                     >
                 <Button.Background>
-                    <ImageBrush ImageSource="Images/MainScreen/close.png" 
+                    <ImageBrush ImageSource="{Binding Close, Converter={StaticResource converter}}" 
                        RenderOptions.BitmapScalingMode="HighQuality"/>
                 </Button.Background>
             </Button>
@@ -212,14 +215,14 @@
 
 
         <Grid Grid.Row="1" Grid.RowSpan="3"
-              Name="Backgroung"
+              
               PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
             <!--Background Image-->
             <Grid x:Name="About" Margin="65,50,0,50">
 
                 <Grid.Background>
 
-                    <ImageBrush ImageSource="Images/MainScreen/background.png" 
+                    <ImageBrush ImageSource="{Binding Background,Converter={StaticResource converter}}" 
                                 RenderOptions.BitmapScalingMode="HighQuality"
                                 x:Name="img_bg"
                                 Stretch="Uniform"
@@ -228,32 +231,19 @@
 
             </Grid>
         </Grid>
-        
+
         <Grid Grid.Row="1" Grid.RowSpan="3">
-            <!--Background Image-->
-            <!--<Grid x:Name="About" Margin="65,50,0,50">
 
-                <Grid.Background>
-
-                    <ImageBrush ImageSource="Images/MainScreen/background.png" Stretch="Uniform"
-                          />
-                </Grid.Background>
-
-            </Grid>-->
 
             <!--//Navigation Panel//-->
             <Grid x:Name="nav_pnl"
               HorizontalAlignment="Left"
               Width="65"
               Background="#f7b733">
-                
+
                 <StackPanel x:Name="st_pnl">
 
                     <Grid Height="90">
-                        <!--<Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="12*"/>
-                            <ColumnDefinition Width="53*"/>
-                        </Grid.ColumnDefinitions>-->
 
                         <TextBlock
                                Grid.Column="1"
@@ -290,7 +280,7 @@
                         >
                             <ToggleButton.Background>
 
-                                <ImageBrush ImageSource="Images/MainScreen/menu.png" Stretch="Fill"/>
+                                <ImageBrush ImageSource="{Binding Menu, Converter={StaticResource converter}}" Stretch="Fill"/>
 
                             </ToggleButton.Background>
 
@@ -365,7 +355,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/home.png" 
+                                        <ImageBrush ImageSource="{Binding Home, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
@@ -412,7 +402,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/favorite.png" 
+                                        <ImageBrush ImageSource="{Binding Favorite, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
@@ -459,7 +449,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/contact.png" 
+                                        <ImageBrush ImageSource="{Binding Contact, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
@@ -506,7 +496,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/location.png" 
+                                        <ImageBrush ImageSource="{Binding Location, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
@@ -553,7 +543,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/setting.png" 
+                                        <ImageBrush ImageSource="{Binding Setting, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
@@ -598,14 +588,14 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="Images/MainScreen/about.png" 
+                                        <ImageBrush ImageSource="{Binding About, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                                     </Button.Background>
-                                    
+
 
                                 </Button>
-                                
+
                                 <TextBlock Text="About"
                                        Margin="25,0,0,0"
                                        Style="{StaticResource font_style}"/>
@@ -701,7 +691,7 @@
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                     <Button.Background>
-                        <ImageBrush ImageSource="Images/MainScreen/add.png" 
+                        <ImageBrush ImageSource="{Binding Add, Converter={StaticResource converter}}" 
                                    Stretch="Fill" />
 
                     </Button.Background>
@@ -721,7 +711,12 @@
             </StackPanel>
 
         </Grid>
+
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              Name="Backgroung"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+        </Grid>
     </Grid>
-    
+
 
 </Window>

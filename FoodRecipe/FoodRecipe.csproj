@@ -104,7 +104,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\menu.png" />
+    <None Include="Images\MainScreen\menu.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\SplashScreen\cancel.png">
@@ -134,32 +136,56 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\contact.png" />
-    <Resource Include="Images\MainScreen\favorite.png" />
-    <Resource Include="Images\MainScreen\home.png" />
-    <Resource Include="Images\MainScreen\location.png" />
+    <None Include="Images\MainScreen\contact.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\MainScreen\favorite.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\MainScreen\home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\MainScreen\location.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\menu_mouseover.png" />
+    <None Include="Images\MainScreen\menu_mouseover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\about.png" />
-    <Resource Include="Images\MainScreen\setting.png" />
+    <None Include="Images\MainScreen\about.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Images\MainScreen\setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\background.png" />
+    <None Include="Images\MainScreen\background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\close.png" />
+    <None Include="Images\MainScreen\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\icon.png" />
+    <None Include="Images\MainScreen\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\close_mouseover.png" />
+    <None Include="Images\MainScreen\close_mouseover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\MainScreen\add.png" />
+    <None Include="Images\MainScreen\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
