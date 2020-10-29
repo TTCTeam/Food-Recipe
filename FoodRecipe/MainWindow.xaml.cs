@@ -24,7 +24,8 @@ namespace FoodRecipe
     /// </summary>
     public partial class MainWindow : Window
     {
-
+       
+        #region MainImage claas
         class MainImage
         {
             public string About { get; set; }
@@ -63,8 +64,11 @@ namespace FoodRecipe
                 this.Setting = $"Images/MainScreen/{images[12]}";
             }
         }
+        #endregion
 
         const string Slash = "/";
+
+        #region MainImageDao
         class MainImageDao
         {
             public static MainImage GetAll()
@@ -83,6 +87,52 @@ namespace FoodRecipe
                 return result;
             }
         }
+        #endregion
+
+
+        public int page = 1;
+
+        Food selected;
+
+        string[] isFavorImage = new string[]
+               {
+                    "like.png",
+                    "notlike.png",
+               };
+
+        class StudentDao
+        {
+            public static BindingList<Food> GetAll()
+            {
+                var result = new BindingList<Food>()
+                {
+                    new Food() { Name="Chu Tùng Nhân", Image="/Images/Image01.jpg", Type = "Tráng miệng"},
+                    new Food() { Name="Nguyen Ánh Du", Image="/Images/Image02.jpg"},
+                    new Food() { Name="Lều Bách Khánh", Image="/Images/Image03.jpg"},
+                    new Food() { Name="Thiều Duy Hành", Image="/Images/Image04.jpg" },
+                    new Food() { Name="Nhiệm Băng Đoan", Image="/Images/Image05.jpg" },
+                    new Food() { Name="Mang Đình Từ", Image="/Images/Image06.jpg" },
+                    new Food() { Name="Bùi Tuyền", Image="/Images/Image07.jpg" },
+                    new Food() { Name="Triệu Triều Hải", Image="/Images/Image08.jpg" },
+                    new Food() { Name="Thiều Duy Hành", Image="/Images/Image04.jpg" },
+                    new Food() { Name="Nhiệm Băng Đoan", Image="/Images/Image05.jpg" },
+                    new Food() { Name="Mang Đình Từ", Image="/Images/Image06.jpg" },
+                    new Food() { Name="Bùi Tuyền", Image="/Images/Image07.jpg" },
+                    new Food() { Name="Triệu Triều Hải", Image="/Images/Image08.jpg" }
+                };
+                return result;
+            }
+        }
+
+        BindingList<Food> _list = new BindingList<Food>();
+        BindingList<Food> list;
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            _list = StudentDao.GetAll();
+            updateData();
+        }
+
+
 
         public MainWindow()
         {
@@ -92,20 +142,21 @@ namespace FoodRecipe
 
             DataContext = inIt;
 
+            this.OpacityGrid.Visibility = Visibility.Hidden;
 
-            this.About.Visibility = Visibility.Hidden;
-
-
+            Display("Home");
         }
 
         private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
         {
-            img_bg.Opacity = 1;
+            
+            this.OpacityGrid.Visibility = Visibility.Hidden;
         }
 
         private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
         {
-            img_bg.Opacity = 0.3;
+            
+            this.OpacityGrid.Visibility = Visibility.Visible;
         }
 
         private void Close_Btn_Click(object sender, RoutedEventArgs e)
@@ -113,39 +164,182 @@ namespace FoodRecipe
             Close();
         }
 
+        #region Button Menu bar
         private void About_Btn_Click(object sender, RoutedEventArgs e)
         {
-            this.About.Visibility = Visibility.Visible;
+            Display("Aboutus");
         }
 
         private void Setting_Btn_Click(object sender, RoutedEventArgs e)
         {
 
+            Display("Setting");
         }
 
-        private void Location_Btn_Click(object sender, RoutedEventArgs e)
+        private void AddRecipe_Btn_Click(object sender, RoutedEventArgs e)
         {
-
+            Display("AddRecipe");
         }
 
         private void Contact_Btn_Click(object sender, RoutedEventArgs e)
         {
-
+            Display("Contact");
         }
 
         private void Favorite_Btn_Click(object sender, RoutedEventArgs e)
         {
-
+            Display("Favorite");
         }
 
         private void Home_Btn_Click(object sender, RoutedEventArgs e)
-        {
-
+        { 
+            Display("Home");
         }
+        #endregion
 
         private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.Tg_Btn.IsChecked = false;
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = ListView.SelectedIndex;
+
+            switch (index)
+            {
+                //Home
+                case 0:
+                    Display("Home");
+                    break;
+                    //Favorite
+                case 1:
+                    Display("Favorite");
+
+                    break;
+                    //Contact
+                case 2:
+                    Display("Contact");
+
+                    break;
+                    //Add recipe
+                case 3:
+                    Display("AddRecipe");
+                    
+                    break;
+                    //Setting
+                case 4:
+                    Display("Setting");
+
+                    break;
+                    //About us
+                case 5:
+
+                    Display("Aboutus");
+
+                    break;
+            }
+
+        }
+
+        /// <summary>
+        /// Display the grid you want to
+        /// </summary>
+        /// <param name="currntSelectedItem">/// </param>
+        void Display(string currntSelectedItem)
+        {
+            Home_ListView.Visibility = Visibility.Hidden;
+            Favorite.Visibility = Visibility.Hidden;
+            Contact.Visibility = Visibility.Hidden;
+            Add.Visibility = Visibility.Hidden;
+            Setting.Visibility = Visibility.Hidden;
+            About.Visibility = Visibility.Hidden;
+            switch (currntSelectedItem)
+            {
+                case "Home":
+                    Home_ListView.Visibility = Visibility.Visible;
+                    break;
+
+                case "Favorite":
+                    Favorite.Visibility = Visibility.Visible;
+                    break;
+
+                case "Contact":
+                    Contact.Visibility = Visibility.Visible;
+                    break;
+                case "AddRecipe":
+                    Add.Visibility = Visibility.Visible;
+                    break;
+                case "Setting":
+                    Setting.Visibility = Visibility.Visible;
+                    break;
+
+                case "Aboutus":
+                    About.Visibility = Visibility.Visible;
+                    break;
+
+            }
+        }
+
+        private void nextButton_Click(object sender, RoutedEventArgs e)
+        {
+            int n = 1;
+            if (_list.Count % 8 == 0)
+            {
+                n = 0;
+            }
+            if (page < _list.Count / 8 + n)
+            {
+                page++;
+                updateData();
+            }
+        }
+
+        private void previosButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (page > 1)
+            {
+                page--;
+                updateData();
+            }
+        }
+
+        public void updateData()
+        {
+            int totalPage = _list.Count + 1;
+            list = new BindingList<Food>();
+            for (int i = 0; i < _list.Count; i++)
+            {
+                if (i >= (page - 1) * 8 && i < (page - 1) * 8 + 8)
+                {
+                    list.Add(_list[i]);
+                }
+            }
+            Page.Content = $"{page}/{totalPage / 8 + 1}";
+            dataListView.ItemsSource = list;
+        }
+
+        private void heartButton_Click(object sender, RoutedEventArgs e)
+        {
+            var bt = sender as Button;
+            var item = bt.DataContext;
+            selected = item as Food;
+            selected.isFavor = !selected.isFavor;
+        }
+
+        private void dataListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (dataListView.SelectedIndex != -1)
+            {
+                MessageBoxResult result = MessageBox.Show("KKK");
+            }
+
+            dataListView.SelectedIndex = -1;
+        }
+
+        private void SaveSetting_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

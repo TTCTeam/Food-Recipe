@@ -9,10 +9,12 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Topmost="True"
-   
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
+        <local:HeartConverter x:Key="Converter"  />
+        
         <local:AbsoluteConverter x:Key="converter"/>
 
         <!--Image backgroung toggle button when mouse_over-->
@@ -41,8 +43,6 @@
                 </Setter.Value>
 
             </Setter>
-
-
 
         </Style>
 
@@ -169,6 +169,62 @@
 
         </Style>
 
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyleInMenu" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#EAB01E"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#EAB01E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F1CA68"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#F1CA68"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Window.Resources>
 
     <Grid>
@@ -183,6 +239,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <!--//Header App-->
         <Grid Grid.Row="0"
               Background="#f7b733"
               >
@@ -199,7 +256,8 @@
             </StackPanel>
             <Button HorizontalAlignment="Right"
                     Margin="7,5"
-                    Width="40"
+                    Width="30"
+                    Height="30"
                     BorderThickness="0"
                     Name="Close_Btn"
                     Click="Close_Btn_Click"
@@ -213,7 +271,29 @@
 
         </Grid>
 
+        
+        <!--//Favorite grid-->
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              x:Name="Favorite"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
 
+        </Grid>
+
+        <!--//Contact grid-->
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              x:Name="Contact"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+
+        </Grid>
+        
+        <!--Add Recipe-->
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              x:Name="Add"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+
+        </Grid>
+
+        <!--//About Button Grid-->
         <Grid Grid.Row="1" Grid.RowSpan="3"
               
               PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
@@ -232,11 +312,299 @@
             </Grid>
         </Grid>
 
+        <!--//Setting Grid-->
+        <Grid Grid.Row="1" Grid.RowSpan="3" x:Name="Setting"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+             Margin="65,0,0,0">
+            
+            <StackPanel Orientation="Vertical" 
+                        VerticalAlignment="Top"
+                        Margin="30">
+
+                <TextBlock Text="S E T T I N G" FontSize="30"
+                           TextAlignment="Center"
+                           
+                               Foreground="Black" FontWeight="Bold"
+                               />
+
+
+                <StackPanel Orientation="Vertical">
+                    
+                    <Label Content="S P L A S H S C R E E N" FontSize="20"
+                           Foreground="Black" FontWeight="Bold"/>
+                    
+                    <CheckBox Content="Show SplashScreen"
+                             FontStyle="Italic"
+                             FontSize="15"
+                              x:Name="checkShowPlashScreen"
+                            Margin="70,0,0,0"
+                              />
+                    <Label Content="C O L O R  T H E M E" FontSize="20"
+                           Foreground="Black" FontWeight="Bold"/>
+                    <StackPanel Margin="10">
+                        <RadioButton GroupName="ColorTheme">
+                            
+                                <TextBlock Width="30" Height="30" Background="Green" />
+                            
+                        </RadioButton>
+                        
+                        <RadioButton GroupName="ColorTheme" Margin="0,5">
+                           
+                                <TextBlock Width="30" Height="30" Background="Red" />
+                            
+                        </RadioButton>
+                        
+                        <RadioButton GroupName="ColorTheme" IsChecked="True">
+                                <TextBlock Width="30" Height="30" Background="Blue" />
+                        </RadioButton>
+                        
+                        <RadioButton GroupName="ColorTheme" IsChecked="True">
+                            <TextBlock Width="30" Height="30" Background="#f7b733" />
+                        </RadioButton>
+                    </StackPanel>
+
+                </StackPanel>
+
+                
+            </StackPanel>
+            <Button Content="Save" 
+                        VerticalAlignment="Bottom"
+                    Foreground="White"
+                    Name="SaveSetting"
+                    Click="SaveSetting_Click"
+                    HorizontalAlignment="Right"
+                    Margin="20" FontSize="20" FontWeight="Bold"
+                        Background="DarkCyan" Height="40" Width="100"
+                    Style="{StaticResource ButtonStyleInMenu}"/>
+
+        </Grid>
+
+        <!--Home Grid-->
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+
+            <Grid x:Name="Home_ListView">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="65"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="1">
+                        <ListView Name="dataListView" 
+                              BorderThickness="0"
+                                 Margin="0,45,0,0"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                              SelectionChanged="dataListView_SelectionChanged">
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+
+                                    <Border BorderThickness="1" 
+                                        BorderBrush="Red"
+                                        Margin="6,6,5,6"  
+                                        CornerRadius="10">
+
+                                        <StackPanel Width="210" 
+                                                Height="250" 
+                                                RenderOptions.BitmapScalingMode="HighQuality">
+
+                                            <Border Width="210" Height="150">
+
+                                                <Border Name="ReceiverColor" CornerRadius="9">
+
+                                                    <Grid>
+
+                                                        <Border Name="Mask" Background="Blue" CornerRadius="8" />
+
+                                                        <StackPanel>
+
+                                                            <Image Name="foodImage" Source="{Binding Avatar}" 
+                                                               Stretch="UniformToFill"/>
+
+                                                            <Button Name="heartButton"  
+                                                                Width="25" Height="25" 
+                                                                BorderThickness="0"
+                                                                Padding="1,1,1,1" 
+                                                                HorizontalContentAlignment="Center" Margin="178,122,0,0"
+                                                                Click="heartButton_Click"
+                                                                    Style="{StaticResource Btn_ListView}">
+                                                                
+                                                                <Button.Background>
+
+                                                                    <!--Binding isFavor, Converter={StaticResource converter}}-->
+                                                                    <ImageBrush ImageSource="{Binding isFavor, Converter={StaticResource Converter}}" />
+
+                                                                </Button.Background>
+
+                                                            </Button>
+
+                                                            <StackPanel.OpacityMask>
+
+                                                                <VisualBrush Visual="{Binding ElementName=Mask}" />
+
+                                                            </StackPanel.OpacityMask>
+
+                                                        </StackPanel>
+
+                                                    </Grid>
+
+                                                </Border>
+
+                                            </Border>
+
+                                            <TextBlock HorizontalAlignment="Center" FontFamily="Champagne &amp; Limousines" FontWeight="Bold" Margin="5,15,0,0" FontSize="15" Text="{Binding Name}" Foreground="#FFC00000"/>
+
+                                            <TextBlock Margin="5,2,0,0" FontSize="12" Text="________________________________________"/>
+
+                                            <TextBlock HorizontalAlignment="Center" FontFamily="Champagne &amp; Limousines" FontWeight="Bold" Margin="5,16,0,0" FontSize="13" Text="{Binding Type}"/>
+
+                                            <!--<Image Source="{Binding isFavorImage}" Height="18" Width="18" MouseDown="IsFavorImage_MouseDown"/>-->
+                                        </StackPanel>
+
+                                    </Border>
+
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                            <!--//Template for ListViewItem-->
+                            <ListView.ItemContainerStyle>
+
+                                <Style TargetType="ListViewItem">
+
+                                    <Setter Property="Template">
+
+                                        <Setter.Value>
+
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                                <Border x:Name="Bd"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                SnapsToDevicePixels="True">
+
+                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                                </Border>
+
+                                                <ControlTemplate.Triggers>
+
+                                                    <MultiTrigger>
+
+                                                        <MultiTrigger.Conditions>
+
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+
+                                                        </MultiTrigger.Conditions>
+
+                                                        <Setter Property="Background"
+                                                        Value="#ffca1a"
+                                                        TargetName="Bd"/>
+
+                                                        <Setter Property="BorderBrush" 
+                                                       TargetName="Bd"
+                                                       Value="#ffca1a"/>
+
+                                                    </MultiTrigger>
+
+                                                </ControlTemplate.Triggers>
+
+                                            </ControlTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </ListView.ItemContainerStyle>
+
+
+                        </ListView>
+                        
+                    </Grid>
+                    
+
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Margin="65,0,0,0">
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,0,15,0"
+                                HorizontalAlignment="Right">
+
+                        <Button FontWeight="Bold" 
+                        FontSize="16" 
+                                Margin="5"
+                        Background="GreenYellow" 
+                        x:Name="previosButton" 
+                        Content="Previous" 
+                        FontFamily="Champagne &amp; Limousines"                       
+                        Click="previosButton_Click" 
+                                Width="100"
+                        Style="{DynamicResource ButtonStyleInMenu}"/>
+
+                        <Label Foreground="Red" 
+                       FontSize="32" 
+                       FontWeight="Bold" 
+                       Name="Page" 
+                                Margin="5"
+                       Width="80" 
+                       FontFamily="Champagne &amp; Limousines" 
+                       HorizontalContentAlignment="Center" 
+                      />
+
+                        <Button FontWeight="Bold" 
+                        FontSize="16" 
+                                 Margin="5"
+                                Width="100"
+                        Background="GreenYellow" 
+                        x:Name="nextButton" 
+                        Content="Next" 
+                        FontFamily="Champagne &amp; Limousines"
+                        Click="nextButton_Click" 
+                        Style="{DynamicResource ButtonStyleInMenu}"/>
+
+                    </StackPanel>
+                    
+
+
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+        <!--Opacitylayer-->
+        <Grid Grid.Row="1" Grid.RowSpan="3" x:Name="OpacityGrid"
+              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
+              Background="WhiteSmoke" 
+             Opacity="0.3" >
+
+        </Grid>
+        <!--//Navigation Panel//-->
         <Grid Grid.Row="1" Grid.RowSpan="3">
 
-
             <!--//Navigation Panel//-->
-            <Grid x:Name="nav_pnl"
+            <Grid x:Name="nav_pnl" Grid.Column="0"
               HorizontalAlignment="Left"
               Width="65"
               Background="#f7b733">
@@ -245,6 +613,7 @@
 
                     <Grid Height="90">
 
+                        <!--Text present name of the toggleButton-->
                         <TextBlock
                                Grid.Column="1"
                                Margin="73,0,0,0"                              
@@ -330,10 +699,14 @@
 
                     </Grid>
 
-                    <ListView x:Name="listView"
+                    <!--//ListView Functionality-->
+                    <ListView x:Name="ListView"
                           Background="Transparent"
                           BorderBrush="Transparent"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          SelectionChanged="ListView_SelectionChanged"
+                          SelectedIndex="0"
+                              >
 
                         <!--Home-->
 
@@ -489,15 +862,15 @@
                                         Height="35"
                                         Width="35"
                                         Margin="7,0,0,0"    
-                                        Name="Location_Btn"
+                                        Name="AddRecipe_Btn"
                                         BorderThickness="0"
-                                        Click="Location_Btn_Click"
+                                        Click="AddRecipe_Btn_Click"
                                         HorizontalAlignment="Center"
                                         Style="{DynamicResource Btn_ListView}"
                                         >
                                     <Button.Background>
-                                        <ImageBrush ImageSource="{Binding Location, Converter={StaticResource converter}}" 
-                                   Stretch="Fill" />
+                                        <ImageBrush ImageSource="{Binding Add, Converter={StaticResource converter}}" 
+                                   Stretch="Fill" RenderOptions.BitmapScalingMode="HighQuality"/>
 
                                     </Button.Background>
 
@@ -615,6 +988,7 @@
 
                         </ListViewItem>
 
+                        <!--//Template for ListViewItem-->
                         <ListView.ItemContainerStyle>
 
                             <Style TargetType="ListViewItem">
@@ -676,46 +1050,11 @@
                 </StackPanel>
 
             </Grid>
-        </Grid>
-        <Grid Grid.Row="2">
-
-            <StackPanel Orientation="Horizontal"
-                                    
-                                  HorizontalAlignment="Right">
-                <Button
-                                        Height="50"
-                                        Width="50"
-                                        Margin="7,0,30,0"                                          
-                                        BorderThickness="0"                                      
-                                        HorizontalAlignment="Center"
-                                        Style="{DynamicResource Btn_ListView}"
-                                        >
-                    <Button.Background>
-                        <ImageBrush ImageSource="{Binding Add, Converter={StaticResource converter}}" 
-                                   Stretch="Fill" />
-
-                    </Button.Background>
-
-                    <Button.ToolTip>
-
-                        <ToolTip
-                           
-                            x:Name="btn_AddRecipe"
-                                     Content="Add Your Recipe"
-                                     Style="{StaticResource tt_add_style}"
-                                    />
-
-                    </Button.ToolTip>
-
-                </Button>
-            </StackPanel>
 
         </Grid>
 
-        <Grid Grid.Row="1" Grid.RowSpan="3"
-              Name="Backgroung"
-              PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
-        </Grid>
+        
+
     </Grid>
 
 

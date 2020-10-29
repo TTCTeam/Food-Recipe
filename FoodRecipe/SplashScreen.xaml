@@ -192,6 +192,7 @@
                     FontWeight="Light"
                     Foreground="White"
                     FontStyle="Italic"
+                    x:Name="checkShow"
                     Content="Don't show again.">
                         <CheckBox.Effect>
                             <DropShadowEffect BlurRadius="2"/>

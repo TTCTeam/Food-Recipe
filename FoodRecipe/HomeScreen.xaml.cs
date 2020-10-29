@@ -18,7 +18,7 @@ namespace FoodRecipe
     /// <summary>
     /// Interaction logic for HomeScreen.xaml
     /// </summary>
-    public partial class HomeScreen : Window
+    public partial class HomeScreen :Window
     {
         public int page = 1;
 
@@ -118,7 +118,9 @@ namespace FoodRecipe
             {
                 MessageBoxResult result = MessageBox.Show("KKK");
             }
+
             dataListView.SelectedIndex = -1;
         }
+
     }
 }

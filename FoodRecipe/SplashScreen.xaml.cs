@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -136,9 +137,25 @@ namespace FoodRecipe
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            var config = ConfigurationManager.OpenExeConfiguration(
+              ConfigurationUserLevel.None);
+
+            if (checkShow.IsChecked == true)
+            {
+
+                config.AppSettings.Settings["ShowSplashScreen"].Value = "false";
+
+            }
+            else
+            {
+                config.AppSettings.Settings["ShowSplashScreen"].Value = "true";
+
+            }
+
+            config.Save(ConfigurationSaveMode.Minimal);
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
-            this.Hide();
+            this.Close();
         }
     }
 }
