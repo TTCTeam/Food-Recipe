@@ -103,20 +103,7 @@
             </Image>
         </Grid>
 
-        <Grid Grid.Row="0"
-              HorizontalAlignment="Right"
-              VerticalAlignment="Top">
-            <Image Source="{Binding CloseIcon, Converter={StaticResource converter}}"
-                   Margin="0,10,10,0"
-                    Height="40"/>
-            <Button
-              Margin="0,10,10,0"
-              Opacity="0"
-              BorderThickness="0"
-              x:Name="Cancel" Click="Cancel_Click">
-            </Button>
-        </Grid>
-
+        
 
         <Grid Grid.Row="2"
               Background="#f6d365"

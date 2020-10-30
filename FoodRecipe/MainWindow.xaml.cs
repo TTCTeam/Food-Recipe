@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,9 @@ namespace FoodRecipe
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+
         #region MainImage claas
-        class MainImage
+        class MainImage: INotifyPropertyChanged
         {
             public string About { get; set; }
             public string Add { get; set; }
@@ -41,6 +42,8 @@ namespace FoodRecipe
             public string Menu { get; set; }
             public string Menu_MouseOver { get; set; }
             public string Setting { get; set; }
+
+            public string Color { get; set; }
 
             public MainImage()
             {
@@ -62,7 +65,10 @@ namespace FoodRecipe
                 this.Menu = $"Images/MainScreen/{images[10]}";
                 this.Menu_MouseOver = $"Images/MainScreen/{images[11]}";
                 this.Setting = $"Images/MainScreen/{images[12]}";
+                this.Color = "";
             }
+
+            public event PropertyChangedEventHandler PropertyChanged;
         }
         #endregion
 
@@ -80,7 +86,6 @@ namespace FoodRecipe
                 {
                     var line = reader.ReadLine();
                     string[] tokens = line.Split(new string[] { Slash }, StringSplitOptions.RemoveEmptyEntries);
-
                     result = new MainImage(tokens);
 
                 }
@@ -132,15 +137,19 @@ namespace FoodRecipe
             updateData();
         }
 
-
+       MainImage inIt;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            MainImage inIt = MainImageDao.GetAll();
+            inIt = MainImageDao.GetAll();
 
+            var valueColor = ConfigurationManager.AppSettings["ColorTheme"];
+
+            inIt.Color = valueColor;
             DataContext = inIt;
+           
 
             this.OpacityGrid.Visibility = Visibility.Hidden;
 
@@ -149,13 +158,13 @@ namespace FoodRecipe
 
         private void Tg_Btn_Unchecked(object sender, RoutedEventArgs e)
         {
-            
+
             this.OpacityGrid.Visibility = Visibility.Hidden;
         }
 
         private void Tg_Btn_Checked(object sender, RoutedEventArgs e)
         {
-            
+
             this.OpacityGrid.Visibility = Visibility.Visible;
         }
 
@@ -174,26 +183,62 @@ namespace FoodRecipe
         {
 
             Display("Setting");
+
+            //ĐỌc thông tin biến lưu xem yêu cầu về hiển thị splashscreen để set checked cho checkbox
+            var value = ConfigurationManager.AppSettings["DontShowSplashScreen"];
+            var valuecolor = ConfigurationManager.AppSettings["ColorTheme"];
+
+            var showplash = bool.Parse(value);
+            this.checkShowPlashScreen.IsChecked = showplash;
+
+            switch (valuecolor)
+            {
+                //Green theme
+                case "#d4fc79":
+                    Green_Theme.IsChecked = true;
+                    break;
+                 
+                //Red Theme
+                case "#fa709a":
+                    Red_Theme.IsChecked = true;
+                    break;
+
+                //Blue Theme
+                case "#4facfe":
+                    Blue_Theme.IsChecked = true;
+                    break;
+
+                //Yellow Theme
+                case "#f7b733":
+                    Yellow_Theme.IsChecked = true;
+                    break;
+            }    
+
+
         }
 
         private void AddRecipe_Btn_Click(object sender, RoutedEventArgs e)
         {
             Display("AddRecipe");
+            this.Tg_Btn.IsChecked = false;
         }
 
         private void Contact_Btn_Click(object sender, RoutedEventArgs e)
         {
             Display("Contact");
+            this.Tg_Btn.IsChecked = false;
         }
 
         private void Favorite_Btn_Click(object sender, RoutedEventArgs e)
         {
             Display("Favorite");
+            this.Tg_Btn.IsChecked = false;
         }
 
         private void Home_Btn_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             Display("Home");
+            this.Tg_Btn.IsChecked = false;
         }
         #endregion
 
@@ -205,34 +250,34 @@ namespace FoodRecipe
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int index = ListView.SelectedIndex;
-
+            this.Tg_Btn.IsChecked = false;
             switch (index)
             {
                 //Home
                 case 0:
                     Display("Home");
                     break;
-                    //Favorite
+                //Favorite
                 case 1:
                     Display("Favorite");
 
                     break;
-                    //Contact
+                //Contact
                 case 2:
                     Display("Contact");
 
                     break;
-                    //Add recipe
+                //Add recipe
                 case 3:
                     Display("AddRecipe");
-                    
+
                     break;
-                    //Setting
+                //Setting
                 case 4:
                     Display("Setting");
 
                     break;
-                    //About us
+                //About us
                 case 5:
 
                     Display("Aboutus");
@@ -339,7 +384,49 @@ namespace FoodRecipe
 
         private void SaveSetting_Click(object sender, RoutedEventArgs e)
         {
+            var config = ConfigurationManager.OpenExeConfiguration(
+             ConfigurationUserLevel.None);
 
+            if (this.checkShowPlashScreen.IsChecked == true)
+            {
+                config.AppSettings.Settings["DontShowSplashScreen"].Value = "true";
+            }
+            else
+            {
+                config.AppSettings.Settings["DontShowSplashScreen"].Value = "false";
+            }
+
+            string color = "";
+            //Color Theme
+            if(Green_Theme.IsChecked ==true)
+            {
+                config.AppSettings.Settings["ColorTheme"].Value = "#d4fc79";
+                color = "#d4fc79";
+            }
+            
+            if(Red_Theme.IsChecked ==true)
+            {
+                config.AppSettings.Settings["ColorTheme"].Value = "#fa709a";
+                color = "#fa709a";
+            }
+            
+            if(Blue_Theme.IsChecked ==true)
+            {
+                config.AppSettings.Settings["ColorTheme"].Value = "#4facfe";
+                color = "#4facfe";
+            }
+            
+            if(Yellow_Theme.IsChecked ==true)
+            {
+                config.AppSettings.Settings["ColorTheme"].Value = "#f7b733";
+                color = "#f7b733";
+            }
+
+            inIt.Color = color;
+
+            config.Save(ConfigurationSaveMode.Minimal);
+
+            DataContext = inIt;
         }
     }
 }

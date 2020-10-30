@@ -6,9 +6,7 @@
         xmlns:local="clr-namespace:FoodRecipe"
         mc:Ignorable="d"
         Title="MainWindow"  Height="675" Width="1000"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        Topmost="True"
+        
         Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -241,7 +239,7 @@
 
         <!--//Header App-->
         <Grid Grid.Row="0"
-              Background="#f7b733"
+              Background="{Binding Color}"
               >
             <StackPanel Orientation="Horizontal"
                         >
@@ -333,32 +331,33 @@
                     <Label Content="S P L A S H S C R E E N" FontSize="20"
                            Foreground="Black" FontWeight="Bold"/>
                     
-                    <CheckBox Content="Show SplashScreen"
+                    <CheckBox Content="Don't Show SplashScreen"
                              FontStyle="Italic"
                              FontSize="15"
                               x:Name="checkShowPlashScreen"
                             Margin="70,0,0,0"
                               />
+                    
                     <Label Content="C O L O R  T H E M E" FontSize="20"
                            Foreground="Black" FontWeight="Bold"/>
                     <StackPanel Margin="10">
-                        <RadioButton GroupName="ColorTheme">
-                            
-                                <TextBlock Width="30" Height="30" Background="Green" />
-                            
-                        </RadioButton>
-                        
-                        <RadioButton GroupName="ColorTheme" Margin="0,5">
-                           
-                                <TextBlock Width="30" Height="30" Background="Red" />
+                        <RadioButton GroupName="ColorTheme" x:Name="Green_Theme">
+
+                            <TextBlock Width="30" Height="30" Background="#d4fc79" />
                             
                         </RadioButton>
                         
-                        <RadioButton GroupName="ColorTheme" IsChecked="True">
-                                <TextBlock Width="30" Height="30" Background="Blue" />
+                        <RadioButton GroupName="ColorTheme" x:Name="Red_Theme" Margin="0,5">
+
+                            <TextBlock Width="30" Height="30" Background="#fa709a" />
+                            
+                        </RadioButton>
+
+                        <RadioButton GroupName="ColorTheme" x:Name="Blue_Theme" IsChecked="True"  Margin="0,5">
+                            <TextBlock Width="30" Height="30" Background="#4facfe" />
                         </RadioButton>
                         
-                        <RadioButton GroupName="ColorTheme" IsChecked="True">
+                        <RadioButton GroupName="ColorTheme" x:Name="Yellow_Theme" >
                             <TextBlock Width="30" Height="30" Background="#f7b733" />
                         </RadioButton>
                     </StackPanel>
@@ -554,7 +553,7 @@
                         <Button FontWeight="Bold" 
                         FontSize="16" 
                                 Margin="5"
-                        Background="GreenYellow" 
+                        Background="{Binding Color}" 
                         x:Name="previosButton" 
                         Content="Previous" 
                         FontFamily="Champagne &amp; Limousines"                       
@@ -576,7 +575,7 @@
                         FontSize="16" 
                                  Margin="5"
                                 Width="100"
-                        Background="GreenYellow" 
+                        Background="{Binding Color}" 
                         x:Name="nextButton" 
                         Content="Next" 
                         FontFamily="Champagne &amp; Limousines"
@@ -584,8 +583,6 @@
                         Style="{DynamicResource ButtonStyleInMenu}"/>
 
                     </StackPanel>
-                    
-
 
                 </Grid>
 
@@ -596,7 +593,7 @@
         <!--Opacitylayer-->
         <Grid Grid.Row="1" Grid.RowSpan="3" x:Name="OpacityGrid"
               PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
-              Background="WhiteSmoke" 
+              Background="Black" Visibility="Hidden"
              Opacity="0.3" >
 
         </Grid>
@@ -607,7 +604,7 @@
             <Grid x:Name="nav_pnl" Grid.Column="0"
               HorizontalAlignment="Left"
               Width="65"
-              Background="#f7b733">
+              Background="{Binding Color}">
 
                 <StackPanel x:Name="st_pnl">
 
