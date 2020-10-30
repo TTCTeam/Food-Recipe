@@ -130,7 +130,13 @@ namespace FoodRecipe
         }
 
         BindingList<Food> _list = new BindingList<Food>();
+
+       
         BindingList<Food> list;
+
+        //list of favorite food
+        BindingList<Food> _favoritelist = new BindingList<Food>();
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _list = StudentDao.GetAll();
@@ -231,12 +237,16 @@ namespace FoodRecipe
 
         private void Favorite_Btn_Click(object sender, RoutedEventArgs e)
         {
+            dataListView.ItemsSource = _favoritelist;
             Display("Favorite");
             this.Tg_Btn.IsChecked = false;
+           
+            
         }
 
         private void Home_Btn_Click(object sender, RoutedEventArgs e)
         {
+            dataListView.ItemsSource = list;
             Display("Home");
             this.Tg_Btn.IsChecked = false;
         }
@@ -294,7 +304,6 @@ namespace FoodRecipe
         void Display(string currntSelectedItem)
         {
             Home_ListView.Visibility = Visibility.Hidden;
-            Favorite.Visibility = Visibility.Hidden;
             Contact.Visibility = Visibility.Hidden;
             Add.Visibility = Visibility.Hidden;
             Setting.Visibility = Visibility.Hidden;
@@ -302,11 +311,8 @@ namespace FoodRecipe
             switch (currntSelectedItem)
             {
                 case "Home":
-                    Home_ListView.Visibility = Visibility.Visible;
-                    break;
-
                 case "Favorite":
-                    Favorite.Visibility = Visibility.Visible;
+                    Home_ListView.Visibility = Visibility.Visible;
                     break;
 
                 case "Contact":
@@ -363,13 +369,28 @@ namespace FoodRecipe
             Page.Content = $"{page}/{totalPage / 8 + 1}";
             dataListView.ItemsSource = list;
         }
-
+        
+        /// <summary>
+        /// Favorite function - HeartButton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void heartButton_Click(object sender, RoutedEventArgs e)
         {
             var bt = sender as Button;
             var item = bt.DataContext;
             selected = item as Food;
             selected.isFavor = !selected.isFavor;
+
+            if (selected.isFavor == true)
+            {
+                _favoritelist.Add(selected);
+            }
+            else
+            {
+                _favoritelist.Remove(selected);
+            }
+           
         }
 
         private void dataListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -425,6 +446,8 @@ namespace FoodRecipe
             inIt.Color = color;
 
             config.Save(ConfigurationSaveMode.Minimal);
+
+            MessageBox.Show("Successfully", "Save",MessageBoxButton.OK, MessageBoxImage.Information);
 
             DataContext = inIt;
         }
