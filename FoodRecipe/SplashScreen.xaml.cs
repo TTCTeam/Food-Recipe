@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -56,8 +57,8 @@ namespace FoodRecipe
 
                     string[] tokens = line.Split(new string[] { Slash }, StringSplitOptions.RemoveEmptyEntries);
 
-                    splscreen.Image = $"Images/{tokens[0]}";
-                    splscreen.CloseIcon = $"Images/{tokens[1]}";
+                    splscreen.Image = $"Images/SplashScreen/{tokens[0]}";
+                    splscreen.CloseIcon = $"Images/SplashScreen/{tokens[1]}";
                     splscreen.Title = tokens[2];
                     splscreen.Overview = tokens[3];
                 }
@@ -91,14 +92,30 @@ namespace FoodRecipe
         public SplashScreen()
         {
             InitializeComponent();
-           
+
+            
+
             _timer = new System.Timers.Timer(1);
             _timer.Elapsed += UpdateValueProgressBar;
             _timer.Start();
+
+            var value = ConfigurationManager.AppSettings["DontShowSplashScreen"];
+            var dontshowplash = bool.Parse(value);
+
+            if (dontshowplash == true)
+            {
+                
+                var screen = new MainWindow();
+                screen.Show();
+                this._timer.Stop();
+                this.Close();
+            }
+
             count = (int)progressBar.Minimum;
             target = (int)progressBar.Maximum;
             this.Start.Visibility = Visibility.Hidden;
-            this.Cancel.Visibility = Visibility.Hidden;
+
+          
         }
         private void UpdateValueProgressBar(object sender, ElapsedEventArgs e)
         {
@@ -106,22 +123,22 @@ namespace FoodRecipe
             double per = count * 100.0 / target;
             string result = string.Format("{0:0.00}%", per);
 
-            if (count == target)
-            {
-                _timer.Stop();
-                Dispatcher.Invoke(() =>
-                {
-                    percent.Text = result;
-                    this.Start.Visibility = Visibility.Visible;
-                    this.Cancel.Visibility = Visibility.Visible;
-                });
-
-                //... main screen display
-            }
+           
             Dispatcher.Invoke(() => {
+                if (count == target)
+                {
+                    _timer.Stop();
+                   
+                        percent.Text = result;
+                        this.Start.Visibility = Visibility.Visible;
+                   
+                    //... main screen display
+                }
+                
                 percent.Text = result;
                 progressBar.Value = count;
             });
+
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
@@ -132,6 +149,42 @@ namespace FoodRecipe
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = SplashScreenDAO.getAll();
+
+            //var value = ConfigurationManager.AppSettings["ShowSplashScreen"];
+            //var showplash = bool.Parse(value);
+
+            //if (showplash == false)
+            //{
+
+            //    var screen = new MainWindow();
+            //    screen.Show();
+            //    this._timer.Stop();
+            //    this.Close();
+            //}
+        }
+
+        private void Start_Click(object sender, RoutedEventArgs e)
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(
+              ConfigurationUserLevel.None);
+
+            if (checkShow.IsChecked == true)
+            {
+
+                config.AppSettings.Settings["DontShowSplashScreen"].Value = "true";
+
+            }
+            else
+            {
+                config.AppSettings.Settings["DontShowSplashScreen"].Value = "false";
+
+            }
+
+            config.Save(ConfigurationSaveMode.Minimal);
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Close();
         }
     }
 }

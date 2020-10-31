@@ -8,10 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/caloc.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/canhbido.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chetroinuoc.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chexoai.jpg")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/chuoichien.jpg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/addimage.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/addrecipe.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/saverecipe.png")]
 
 
