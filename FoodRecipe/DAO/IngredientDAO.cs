@@ -50,5 +50,17 @@ namespace FoodRecipe.DAO
 
             return ingredientList;
         }
+
+        public int InsertList(int foodID, List<Ingredient> ingredianList)
+        {
+            string query = "exec InsertIngredient @foodID , @name , @amount , @unit";
+            int successRows = 0;
+            foreach (var item in ingredianList)
+            {
+                successRows += DataProvider.Instance.ExcuteNonQuery(query, new object[] { foodID, item.Name, item.Amount, item.Unit });
+            }
+
+            return successRows;
+        }
     }
 }

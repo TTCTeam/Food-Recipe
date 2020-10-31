@@ -26,6 +26,12 @@ namespace FoodRecipe.DAO
 
         private RecipeDAO() { }
 
+
+        /// <summary>
+        /// Lấy dữ liệu hướng dẫn nấu từ database
+        /// </summary>
+        /// <param name="foodID"></param>
+        /// <returns></returns>
         public Recipe GetRecipe(int foodID)
         {
             Recipe recipe;
@@ -43,6 +49,23 @@ namespace FoodRecipe.DAO
             }
 
             return recipe;
+        }
+
+
+        /// <summary>
+        /// Thêm dữ liệu hướng dẫn nấu vào database
+        /// </summary>
+        /// <param name="foodID"></param>
+        /// <param name="recipe"></param>
+        /// <returns>Số bước thêm thành công</returns>
+        public int Insert(int foodID , Recipe recipe)
+        {
+
+            int successRows = 0;
+
+            successRows = StepDAO.Instance.InsertList(foodID, recipe.StepList);
+
+            return successRows;
         }
 
     }

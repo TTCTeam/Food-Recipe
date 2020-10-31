@@ -11,6 +11,8 @@ namespace FoodRecipe.DTO
     {
         public string ImagePath { get; set; }
 
+        public FoodImage() { }
+
         public FoodImage(string imagePath)
         {
             this.ImagePath = imagePath;

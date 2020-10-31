@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodRecipe.DAO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace FoodRecipe.DTO
         public int Ration { get; set; }
         public Recipe Recipe { get; set; }
         public List<Ingredient> Ingredients { get; set; }
+
+        public Food() { }
 
         public Food(int foodID, string name, string type, string area, DateTime createDate, bool isFavor, int ration, Recipe recipe, List<Ingredient> ingredients)
         {
@@ -43,6 +46,15 @@ namespace FoodRecipe.DTO
             Ration = (byte)row["Ration"];
             Recipe = recipe;
             Ingredients = ingredients;
+        }
+
+
+        /// <summary>
+        /// Gọi khi isFavor thay đổi
+        /// </summary>
+        public void FavorChanged()
+        {
+            FoodDAO.Instance.SetFavor(this.FoodID, this.IsFavor);
         }
 
     }

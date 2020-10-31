@@ -9,6 +9,7 @@
     <Grid>
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="373" Margin="20,10,0,0" VerticalAlignment="Top" Width="356"/>
         <Button x:Name="runButton" Content="Run" HorizontalAlignment="Left" Margin="455,109,0,0" VerticalAlignment="Top" Width="98" Height="42"/>
+        <TextBox x:Name="txtNumber" HorizontalAlignment="Left" Height="23" Margin="488,241,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

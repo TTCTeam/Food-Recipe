@@ -10,6 +10,8 @@ namespace FoodRecipe.DTO
     {
         public List<Step> StepList { get; set; }
 
+        public Recipe() { }
+
         public Recipe(List<Step> stepList)
         {
             this.StepList = stepList;

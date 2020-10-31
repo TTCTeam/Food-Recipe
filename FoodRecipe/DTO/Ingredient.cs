@@ -13,6 +13,8 @@ namespace FoodRecipe.DTO
         public decimal Amount { get; set; }
         public string Unit { get; set; }
 
+        public Ingredient() { }
+
         public Ingredient(string name, decimal amount, string unit)
         {
             Name = name;

@@ -30,10 +30,17 @@ namespace FoodRecipe
 
         public void LoadAllFood()
         {
-            //List<Food> foodList = FoodDAO.Instance.GetAllWithoutDetail();
-            Recipe l = RecipeDAO.Instance.GetRecipe(1);
+            //int num = FoodDAO.Instance.GetNumOfFoodWithFilter(null,null,"Miền Trung");
+            //Recipe l = RecipeDAO.Instance.GetRecipe(1);
 
-            //dataGrid.ItemsSource = l;
+            //dataGrid.Items.Add(num.ToString());
+
+            Food food = FoodDAO.Instance.GetByID(1);
+            food.IsFavor = true;
+            food.FavorChanged();
+            
+        
+            
 
         }
           

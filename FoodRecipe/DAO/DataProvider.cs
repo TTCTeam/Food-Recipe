@@ -28,7 +28,12 @@ namespace FoodRecipe.DAO
 
         private DataProvider() { }
 
-        // Hàm lấy data...
+        /// <summary>
+        /// Truy vấn trên SQL Server
+        /// </summary>
+        /// <param name="query">Câu truy vấn</param>
+        /// <param name="parameter">Tham số khi câu truy vấn là Stored Procedure</param>
+        /// <returns>Bảng kết quả</returns>
         public DataTable ExcuteQuery(string query, object[] parameter = null)
         {
             DataTable data = new DataTable();
@@ -47,7 +52,7 @@ namespace FoodRecipe.DAO
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameter[i]);
+                            command.Parameters.AddWithValue(item, parameter[i] ?? DBNull.Value);
                             i++;
                         }
                     }
@@ -63,11 +68,16 @@ namespace FoodRecipe.DAO
             return data;
         }
 
-        // Hàm insert...
-        // Trả về số dòng thêm thành công
+        
+        /// <summary>
+        /// Truy vấn trên SQL Server không trả về bảng
+        /// </summary>
+        /// <param name="query">Câu truy vấn</param>
+        /// <param name="parameter">Tham số khi câu truy vấn là Stored Procedure</param>
+        /// <returns>Số dòng bị ảnh hưởng</returns>
         public int ExcuteNonQuery(string query, object[] parameter = null)
         {
-            int successedRows = 0;
+            int successedRows;
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
@@ -83,13 +93,13 @@ namespace FoodRecipe.DAO
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameter[i]);
+                            command.Parameters.AddWithValue(item, parameter[i] ?? DBNull.Value);
                             i++;
                         }
                     }
                 }
 
-                command.ExecuteNonQuery();
+                successedRows = command.ExecuteNonQuery();
 
                 connection.Close();
             }
@@ -98,10 +108,16 @@ namespace FoodRecipe.DAO
         }
 
 
-        // Hàm lấy ô đầu tiên (select count(*) from ...)
+        
+        /// <summary>
+        /// Truy vấn trên SQL Server trả về 1 ô
+        /// </summary>
+        /// <param name="query">Câu truy vấn</param>
+        /// <param name="parameter">Tham số khi câu truy vấn là Stored Procedure</param>
+        /// <returns>Ô đầu tiên của bảng kết quả</returns>
         public object ExcuteScalar(string query, object[] parameter = null)
         {
-            object data = 0;
+            object data;
 
             using (SqlConnection connection = new SqlConnection(connectionStr))
             {
@@ -117,13 +133,13 @@ namespace FoodRecipe.DAO
                     {
                         if (item.Contains('@'))
                         {
-                            command.Parameters.AddWithValue(item, parameter[i]);
+                            command.Parameters.AddWithValue(item, parameter[i] ?? DBNull.Value);
                             i++;
                         }
                     }
                 }
 
-                command.ExecuteScalar();
+                 data = command.ExecuteScalar();
 
                 connection.Close();
             }

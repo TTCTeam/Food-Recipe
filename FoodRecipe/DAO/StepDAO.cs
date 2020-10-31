@@ -26,6 +26,12 @@ namespace FoodRecipe.DAO
 
         private StepDAO() { }
 
+        /// <summary>
+        /// Lấy dữ liệu các bước làm của món ăn từ databasse SQL Server
+        /// Bước 0 là phần giới thiệu món ăn
+        /// </summary>
+        /// <param name="foodID"></param>
+        /// <returns>List các bước</returns>
         public List<Step> GetAllAtRecipe(int foodID)
         {
             List<Step> stepList = new List<Step>();
@@ -50,6 +56,26 @@ namespace FoodRecipe.DAO
             }
 
             return stepList;
+        }
+
+
+        /// <summary>
+        /// Thêm list các bước làm vào database SQL Server
+        /// </summary>
+        /// <param name="foodID"></param>
+        /// <param name="stepList"></param>
+        /// <returns>Số bước thêm thành công</returns>
+        public int InsertList(int foodID, List<Step> stepList)
+        {
+            string query = "exec InsertStep @foodID , @step , @content";
+            int successRows = 0;
+            foreach (var item in stepList)
+            {
+                successRows += DataProvider.Instance.ExcuteNonQuery(query, new object[] { foodID, stepList.IndexOf(item), item.Content });
+                FoodImageDAO.Instance.InsertList(foodID, stepList.IndexOf(item), item.FoodImageList);
+            }
+
+            return successRows;
         }
 
     }

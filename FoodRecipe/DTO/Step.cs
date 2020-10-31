@@ -13,6 +13,8 @@ namespace FoodRecipe.DTO
 
         public List<FoodImage> FoodImageList { get; set; }
 
+        public Step() { }
+
         public Step(string content, List<FoodImage> foodImageList)
         {
             this.Content = content;
