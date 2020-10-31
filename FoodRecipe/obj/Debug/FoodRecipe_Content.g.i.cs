@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/like.png")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/notlike.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/addimage.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/addrecipe.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/addrecipescreen/saverecipe.png")]
 
 
