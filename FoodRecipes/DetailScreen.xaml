@@ -1,0 +1,282 @@
+﻿<Window x:Class="FoodRecipes.DetailScreen"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FoodRecipes"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d"
+        Title="{Binding Name}" Height="700" Width="1000"
+        Loaded="DetailScreen_Loaded">
+        
+    <Window.Resources>
+
+        <Style TargetType="TextBlock" x:Key="discrip_style">
+
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+        </Style>
+
+    </Window.Resources>
+    <Grid Background="BurlyWood" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.35*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+
+                <StackPanel Orientation="Vertical" Margin="15"
+                    >
+
+                    <cef:ChromiumWebBrowser Height="400" Address="https://www.youtube.com/embed/M8oheFleKOI"
+                                    />
+
+                    <Label Content="{Binding Name}" FontSize="20" FontWeight="Bold"
+                   Foreground="Black"/>
+
+                    <TextBlock Text="{Binding Path=Recipe.StepList[0].Content}"
+                       Style="{StaticResource discrip_style}"
+                      />
+
+                </StackPanel>
+
+
+            </ScrollViewer>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+
+                    <StackPanel Orientation="Vertical">
+
+                        <Label Content="THANH PHAN" FontSize="17" FontWeight="Medium"
+                   Foreground="Black"/>
+
+                        <DataGrid AutoGenerateColumns="False" 
+                    BorderThickness="2"
+                    HorizontalAlignment="Center" 
+                    Name="ingrediensDataGrid" 
+                    VerticalAlignment="Top" 
+         >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Path=Name}"  />
+                                <DataGridTextColumn>
+                                    <DataGridTextColumn.Binding>
+                                        <MultiBinding StringFormat="{}{0:0.#} {1}">
+                                            <Binding Path="Amount" />
+                                            <Binding Path="Unit" />
+                                        </MultiBinding>
+                                    </DataGridTextColumn.Binding>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </StackPanel>
+
+
+                </ScrollViewer>
+
+
+
+            </Grid>
+
+            <Grid Grid.Column="1" >
+
+
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+
+                    <StackPanel Orientation="Vertical" >
+                        <Label Content="HUONG DAN THUC HIEN" FontSize="17" FontWeight="Medium"
+                   Foreground="Black"/>
+
+
+                        <ListView x:Name="recipeListView" 
+                              BorderThickness="0"
+                                 Margin="20">
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Content}"
+                                    Style="{StaticResource discrip_style}"/>
+                                        <!--//ListView of Step Images-->
+                                        <ListView Name="imagesListView"
+                                              BorderThickness="0"
+                                              Margin="0,45,0,0"
+                                              ItemsSource ="{Binding Path=FoodImageList}">
+
+                                            <ListView.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel/>
+                                                </ItemsPanelTemplate>
+                                            </ListView.ItemsPanel>
+
+                                            <ListView.ItemTemplate>
+
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+
+                                                        <Image Width="60" Height="60"
+                                                             Source="{Binding Path=ImagePath}" />
+
+                                                    </StackPanel>
+
+                                                </DataTemplate>
+
+                                            </ListView.ItemTemplate>
+
+                                            <!--//Template for ListViewItem-->
+                                            <ListView.ItemContainerStyle>
+
+                                                <Style TargetType="ListViewItem">
+
+                                                    <Setter Property="Template">
+
+                                                        <Setter.Value>
+
+                                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                                                <Border x:Name="Bd"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                SnapsToDevicePixels="True">
+
+                                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                                                </Border>
+
+                                                                <ControlTemplate.Triggers>
+
+                                                                    <MultiTrigger>
+
+                                                                        <MultiTrigger.Conditions>
+
+                                                                            <Condition Property="IsMouseOver" Value="True"/>
+
+                                                                        </MultiTrigger.Conditions>
+
+                                                                        <Setter Property="Background"
+                                                        Value="Transparent"
+                                                        TargetName="Bd"/>
+
+                                                                        <Setter Property="BorderBrush" 
+                                                       TargetName="Bd"
+                                                       Value="Transparent"/>
+
+                                                                    </MultiTrigger>
+
+                                                                </ControlTemplate.Triggers>
+
+                                                            </ControlTemplate>
+
+                                                        </Setter.Value>
+
+                                                    </Setter>
+
+                                                </Style>
+
+                                            </ListView.ItemContainerStyle>
+
+                                        </ListView>
+                                    </StackPanel>
+
+
+
+                                </DataTemplate>
+
+                            </ListView.ItemTemplate>
+
+                            <!--//Template for ListViewItem-->
+                            <ListView.ItemContainerStyle>
+
+                                <Style TargetType="ListViewItem">
+
+                                    <Setter Property="Template">
+
+                                        <Setter.Value>
+
+                                            <ControlTemplate TargetType="{x:Type ListViewItem}">
+
+                                                <Border x:Name="Bd"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Background="{TemplateBinding Background}"
+                                                SnapsToDevicePixels="True">
+
+                                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                                                </Border>
+
+                                                <ControlTemplate.Triggers>
+
+                                                    <MultiTrigger>
+
+                                                        <MultiTrigger.Conditions>
+
+                                                            <Condition Property="IsMouseOver" Value="True"/>
+
+                                                        </MultiTrigger.Conditions>
+
+                                                        <Setter Property="Background"
+                                                        Value="Transparent"
+                                                        TargetName="Bd"/>
+
+                                                        <Setter Property="BorderBrush" 
+                                                       TargetName="Bd"
+                                                       Value="Transparent"/>
+
+                                                    </MultiTrigger>
+
+                                                </ControlTemplate.Triggers>
+
+                                            </ControlTemplate>
+
+                                        </Setter.Value>
+
+                                    </Setter>
+
+                                </Style>
+
+                            </ListView.ItemContainerStyle>
+
+                        </ListView>
+
+
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Window>
